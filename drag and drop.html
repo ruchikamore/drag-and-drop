@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+      #left, #right {
+        width: 400px;
+        height: 500px;
+        border: dotted;
+      }
+      #left, #right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-direction: column;
+        text-transform: uppercase;
+      }
+      .items {
+
+        background-color: rgb(221, 16, 33);
+        list-style: none;
+        padding: 20px 45px;
+        cursor: grab;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- <h1>Drag And Drop</h1> -->
+      <div id="left" draggable="true" >
+        <div draggable="true" class="items">Ruchika</div>
+        <div draggable="true" class="items">Arpita</div>
+        <div draggable="true" class="items">Sapna</div>
+        <div draggable="true" class="items">Ritika</div>
+      </div>
+      <div id="right" draggable="true"></div>
+    </div>
+
+    <script>
+      //drag and drop functionality
+      const items = document.getElementsByClassName("items");
+      console.log(items);
+      const rightBox = document.getElementById("right");
+      const leftBox = document.getElementById("left");
+      let Selected = null;
+      // Using For of to drag the item from left to right
+      for (let list of items) {
+       
+        list.addEventListener("dragstart", (e) => {
+          Selected = e.target;
+
+          rightBox.addEventListener("dragover", (e) => {
+          e.preventDefault();
+        });
+
+        rightBox.addEventListener("drop", (e) => {
+        //   e.appendChild(Selected);
+          rightBox.appendChild(Selected);
+        });
+
+        leftBox.addEventListener("dragover", (e) => {
+          e.preventDefault();
+        });
+
+        leftBox.addEventListener("drop", (e) => {
+        //   e.appendChild(Selected);
+          leftBox.appendChild(Selected);
+        });
+    });
+}
+    </script>
+  </body>
+</html>
